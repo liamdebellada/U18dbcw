@@ -52,6 +52,25 @@ def customer():
     
 def booking():
     start_booking_window = Window(app, title='Add booking', width=500, height=400)
+    
+    booking_title = Text(start_booking_window, 'New booking')
+    
+    booking_seatnumber_text = Text(start_booking_window, 'Seat Number:')
+    booking_seatnumber = TextBox(start_booking_window, '')
+    
+    booking_seatnumber_text = Text(start_booking_window, 'Booking Date:')
+    booking_date = TextBox(start_booking_window, '')
+    
+    cursor.execute("SELECT firstName, surName, customer_id FROM customer")
+    name_list = []
+    names = cursor.fetchall()
+    for i in names:
+        name_list.append(i)
+        
+    
+    booking_customer_text = Text(start_booking_window, 'Select customer')
+    booking_customer = Combo(start_booking_window, options=name_list)
+    
 
 def trip():
     start_trip_window = Window(app, title='Add trip', width=500, height=400)
