@@ -1,0 +1,42 @@
+Discussing design of database - meeting:
+
+points to be added during discussion:
+
+First window:
+    -Includes logo
+    -4 option
+    -Apply button
+        -should be changed to save and exit
+    
+customer menu:
+    -name
+    -address 
+        -Add more lines for address
+    -email address
+    -phonenumber
+    -apply button
+        -prefers save and cancel
+
+booking menu:
+    -adding todays date from computer
+    -allows upper and lower case values
+    -Add total cost in a pop up box
+
+Trip menu:
+    -adding trip first before being able to book
+    -remove end date when using duration and start
+    -driver name
+    -Use destination add a drop down menu in this menu
+    -save or cancel
+
+requirements:
+    -local desktop machine: meaning staff office computers or your own computer
+    -free software 
+    -guizero front end: what the user will see.
+
+    
+
+Prefer to call customer 'client'
+takes notes of client details
+write down name and details in booking folder
+

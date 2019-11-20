@@ -1,3 +1,4 @@
+from datetime import *
 from guizero import *
 import sqlite3
 with sqlite3.connect('silver_dawn_coaches') as db:
@@ -6,6 +7,9 @@ with sqlite3.connect('silver_dawn_coaches') as db:
 app = App(title="Silver Dawn database management", width=500, height=400)
 
 button_width = 11
+current_date = date.today()
+
+
 
 def save(first_customer_name, second_customer_name, customer_address_1, customer_address_2, customer_email_address, customer_phone_number, customer_notes):
     print('This has been saved')
@@ -22,8 +26,30 @@ def save(first_customer_name, second_customer_name, customer_address_1, customer
     
     cursor.execute('''INSERT INTO Customer(firstName, surname, AddressLine1, AddressLine2, phoneNum, email, specialNeed) VALUES(?,?,?,?,?,?,?)''', (first_customer_name, second_customer_name, customer_address_1, customer_address_2, customer_phone_number, customer_email_address, customer_notes,))
     db.commit()
+    
+def booking_save(booking_seatnumber, booking_customer, booking_trip):
+    
+    print('This has passed')
+    
+    booking_seatnumber = booking_seatnumber.value
+    booking_customer = booking_customer.value
+    booking_trip = booking_trip.value
+    #using current_date for date entry
+    
+    cursor.execute('''INSERT INTO Booking(customer_id, trip_id, seatNumber, bookingDate) VALUES(?,?,?,?)''', (booking_customer, booking_trip, booking_seatnumber, current_date,))
+    db.commit()
 
-
+def trip_save(trip_cost, trip_startdate, trip_duration, trip_destination, trip_coach, trip_driver):
+    trip_cost = trip_cost.value
+    trip_startdate = trip_startdate.value
+    trip_duration = trip_duration.value
+    trip_destination = trip_destination.value
+    trip_coach = trip_coach.value
+    trip_driver = trip_driver.value
+    
+    cursor.execute('''INSERT INTO Trip(destination_id, personCost, startDate, duration, coach_id, driver_id) VALUES(?,?,?,?,?,?)''', (trip_destination, trip_cost, trip_startdate, trip_duration, trip_coach, trip_driver,))
+    db.commit()
+    
 def customer():
     start_customer_window = Window(app, title='Add customer', width=500, height=400)
     customer_window_text = Text(start_customer_window, 'New customer')
@@ -58,25 +84,47 @@ def booking():
     booking_seatnumber_text = Text(start_booking_window, 'Seat Number:')
     booking_seatnumber = TextBox(start_booking_window, '')
     
-    booking_seatnumber_text = Text(start_booking_window, 'Booking Date:')
-    booking_date = TextBox(start_booking_window, '')
-    
-    cursor.execute("SELECT firstName, surName, customer_id FROM customer")
-    name_list = []
-    names = cursor.fetchall()
-    for i in names:
-        name_list.append(i)
+    booking_customer_text = Text(start_booking_window, 'Customer ID:')
+    booking_customer = TextBox(start_booking_window, '')
         
+    booking_trip_text = Text(start_booking_window, 'Trip ID:')
+    booking_trip = TextBox(start_booking_window, '')
     
-    booking_customer_text = Text(start_booking_window, 'Select customer')
-    booking_customer = Combo(start_booking_window, options=name_list)
-    
+    save_button = PushButton(start_booking_window, text='Save', width=button_width, command=booking_save, args=[booking_seatnumber, booking_customer, booking_trip])
 
 def trip():
     start_trip_window = Window(app, title='Add trip', width=500, height=400)
     
+    trip_cost_text = Text(start_trip_window, 'Enter cost per person:')
+    trip_cost = TextBox(start_trip_window, '')
+    
+    trip_startdate_text = Text(start_trip_window, 'Enter start date:')
+    trip_startdate = TextBox(start_trip_window, '')
+    
+    trip_duration_text = Text(start_trip_window, 'Enter trip duration:')
+    trip_duration = TextBox(start_trip_window, '')
+    
+    trip_destination_text = Text(start_trip_window, 'Enter destination ID:')
+    trip_destination = TextBox(start_trip_window, '')
+    
+    trip_coach_text = Text(start_trip_window, 'Enter coach ID:')
+    trip_coach = TextBox(start_trip_window, '')
+    
+    trip_driver_text = Text(start_trip_window, 'Enter driver ID:')
+    trip_driver = TextBox(start_trip_window, '')
+    
+    trip_save_button = PushButton(start_trip_window, text='Save', width=button_width, command=trip_save, args=[trip_cost, trip_startdate, trip_duration, trip_destination, trip_coach, trip_driver])
+    
 def destination():
     start_destination_window = Window(app, title='Add destination', width=500, height=400)
+    
+    destination_name_text = Text(start_destination_window, 'Enter Destination name:')
+    destination_name = TextBox(start_destination_window, '')
+    
+    destination_hotel_text = Text(start_destination_window, 'Enter Hotel name:')
+    destination_hotel = TextBox(start_destination_window, '')
+    
+    destination_save_button = PushButton(start_destination_window, text='Save', command=destination_save, args=[destination_name, destination_hotel])
     
     
 
