@@ -38,6 +38,13 @@ def booking_save(booking_seatnumber, booking_customer, booking_trip):
     
     cursor.execute('''INSERT INTO Booking(customer_id, trip_id, seatNumber, bookingDate) VALUES(?,?,?,?)''', (booking_customer, booking_trip, booking_seatnumber, current_date,))
     db.commit()
+    
+def destination_save(destination_name, destination_hotel):
+    print('woked')
+    destination_name = destination_name.value
+    destination_hotel = destination_hotel.value
+    
+    cursor.execute('''INSERT INTO Destination(destName, hotelName) VALUES(?,?)'''), (destination_name, destination_hotel)
 
 def trip_save(trip_cost, trip_startdate, trip_duration, trip_destination, trip_coach, trip_driver):
     trip_cost = trip_cost.value
