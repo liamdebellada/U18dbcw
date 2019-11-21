@@ -3,13 +3,25 @@ from guizero import *
 import sqlite3
 with sqlite3.connect('silver_dawn_coaches') as db:
     cursor = db.cursor()
+    cursor.execute("PRAGMA foreign_keys = 1")
 
 app = App(title="Silver Dawn database management", width=500, height=400)
 
 button_width = 11
 current_date = date.today()
 
+booking_seatnumber = 0
 
+def plusbutton(booking_seatnumber_value):
+    global booking_seatnumber
+    booking_seatnumber = booking_seatnumber + 1
+    booking_seatnumber_value.value = booking_seatnumber
+    
+def minusbutton(booking_seatnumber_value):
+    global booking_seatnumber
+    booking_seatnumber = booking_seatnumber - 1
+    booking_seatnumber_value.value = booking_seatnumber
+    
 
 def save(first_customer_name, second_customer_name, customer_address_1, customer_address_2, customer_email_address, customer_phone_number, customer_notes):
     print('This has been saved')
@@ -27,11 +39,10 @@ def save(first_customer_name, second_customer_name, customer_address_1, customer
     cursor.execute('''INSERT INTO Customer(firstName, surname, AddressLine1, AddressLine2, phoneNum, email, specialNeed) VALUES(?,?,?,?,?,?,?)''', (first_customer_name, second_customer_name, customer_address_1, customer_address_2, customer_phone_number, customer_email_address, customer_notes,))
     db.commit()
     
-def booking_save(booking_seatnumber, booking_customer, booking_trip):
+def booking_save(booking_seatnumber_value, booking_customer, booking_trip):
     
     print('This has passed')
     
-    booking_seatnumber = booking_seatnumber.value
     booking_customer = booking_customer.value
     booking_trip = booking_trip.value
     #using current_date for date entry
@@ -44,7 +55,8 @@ def destination_save(destination_name, destination_hotel):
     destination_name = destination_name.value
     destination_hotel = destination_hotel.value
     
-    cursor.execute('''INSERT INTO Destination(destName, hotelName) VALUES(?,?)'''), (destination_name, destination_hotel)
+    cursor.execute('''INSERT INTO Destination(destName, hotelName) VALUES(?,?)''', (destination_name, destination_hotel,))
+    db.commit()
 
 def trip_save(trip_cost, trip_startdate, trip_duration, trip_destination, trip_coach, trip_driver):
     trip_cost = trip_cost.value
@@ -88,8 +100,10 @@ def booking():
     
     booking_title = Text(start_booking_window, 'New booking')
     
-    booking_seatnumber_text = Text(start_booking_window, 'Seat Number:')
-    booking_seatnumber = TextBox(start_booking_window, '')
+    booking_seatnumber_text = Text(start_booking_window, 'Number of seats:')
+    booking_seatnumber_value = Text(start_booking_window, '0')
+    booking_plus = PushButton(start_booking_window, text="+", width=1, height=1, command=plusbutton, args=[booking_seatnumber_value])
+    booking_minus = PushButton(start_booking_window, text='-', width=1, height=1, command=minusbutton, args=[booking_seatnumber_value])
     
     booking_customer_text = Text(start_booking_window, 'Customer ID:')
     booking_customer = TextBox(start_booking_window, '')
