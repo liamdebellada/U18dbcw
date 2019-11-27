@@ -147,6 +147,15 @@ def destination():
     
     destination_save_button = PushButton(start_destination_window, text='Save', command=destination_save, args=[destination_name, destination_hotel])
     
+def query():
+    start_query_window = Window(app, title='Search', width=500, height=400)
+    
+    query_title = Text(start_query_window, 'Search the database:')
+    report = open("report1.txt","w+")
+    
+    cursor.execute("SELECT Trip_id from Trip INNER JOIN Destination ON Destination.destination_id = Trip.destination_id where destName = 'Lincoln Xmas Market'")
+    print(cursor.fetchall())
+    print(len(cursor.fetchall()))
     
 
 main_window_text = Text(app, 'Silver Dawn Coaches booking & management')
@@ -157,6 +166,7 @@ add_customer_button = PushButton(app, text ='New customer', width=button_width, 
 add_booking_button = PushButton(app, text ='New booking', width=button_width, command=booking)
 add_trip_button = PushButton(app, text ='New trip', width=button_width, command=trip)
 add_destination_button = PushButton(app, text ='New destination', width=button_width, command=destination)
+search_button = PushButton(app, text = 'Search Data', width=button_width, command=query)
 
 
 app.display()
