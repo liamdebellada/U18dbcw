@@ -15,7 +15,7 @@ customer menu:
     -email address
     -phonenumber
     -apply button
-        -prefers save and cancel
+        -prefers save and exit
 
 booking menu:
     -adding todays date from computer
@@ -27,7 +27,7 @@ Trip menu:
     -remove end date when using duration and start
     -driver name
     -Use destination add a drop down menu in this menu
-    -save or cancel
+    -save and exit
 
 requirements:
     -local desktop machine: meaning staff office computers or your own computer

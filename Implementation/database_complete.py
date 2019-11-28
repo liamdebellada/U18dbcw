@@ -153,10 +153,28 @@ def query():
     query_title = Text(start_query_window, 'Search the database:')
     report = open("report1.txt","w+")
     
-    cursor.execute("SELECT Trip_id from Trip INNER JOIN Destination ON Destination.destination_id = Trip.destination_id where destName = 'Lincoln Xmas Market'")
-    print(cursor.fetchall())
-    print(len(cursor.fetchall()))
+    s = '   '
     
+    report.write('ID   Firstname   Surname   Address_1        Address_2    Phone_number   Email Address           Notes'+'\n'+'\n')
+    cursor.execute("SELECT Trip_id from Trip INNER JOIN Destination ON Destination.destination_id = Trip.destination_id where destName = 'Lincoln Xmas Market'")
+    trip_id = cursor.fetchall()
+    trip_id = [tripI[0] for tripI in trip_id]
+    trip_id = int(trip_id[0])
+    print(trip_id)
+    cursor.execute("SELECT customer_id FROM Booking where trip_id=?", (trip_id,))
+    customer_id = cursor.fetchall()
+    customer_id = [customerI[0] for customerI in customer_id]
+    #customer_id = int(customer_id[0])
+    print(customer_id)
+    for i in customer_id:
+        cursor.execute('SELECT * FROM Customer where customer_id=?', (i,))
+        print(cursor.fetchall())
+    
+        for row in cursor.execute('SELECT * FROM Customer where customer_id=?', (i,)):
+            #print(row)
+            report.write(str(row))
+            report.write("\n")
+        
 
 main_window_text = Text(app, 'Silver Dawn Coaches booking & management')
 

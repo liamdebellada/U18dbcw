@@ -1,0 +1,17 @@
+ID   Firstname   Surname   Address_1        Address_2    Phone_number   Email Address           Notes
+
+(1, 'Adam', 'Redford', '65 Rendlesham Road', 'None', '(020) 1366 6714', 'adamredford@yahoo.com', 'None')
+(2, 'Adrian', 'Hadcock', 'Flat 30', 'Gill Street', '(020) 6055 6832', 'adrianhadcock@gmail.com', 'None')
+(3, 'Ami', 'Todeo', 'Flat 5', '4 - 6 Davenant Street', '(020) 8675 5833', 'amitodeo@gmail.com', 'None')
+(5, 'Amy', 'Swane', 'Flat 2', '122 St Katharines Way', '(020) 1137 5241', 'amyswane@gmail.com', 'None')
+(9, 'Ann', 'Hall', '2 Gerry Raffles Square', 'None', '(020) 8607 0642', 'annhall@gmail.com', 'None')
+(13, 'Blinni', 'Quakley', '48 Boundary Road', 'None', '(01708) 022736', 'blinniquakley@gmail.com', 'None')
+(26, 'David', 'Collins', 'Flat 401', '37 Commercial Road', '(020) 6350 4606', 'davidcollins@gmail.com', 'None')
+(42, 'Godard', 'Seedman', 'Flat 10', '87 - 91 Hackney Road', '(020) 4452 5786', 'godardseedman@gmail.com', 'None')
+(54, 'John', 'Collinson', '122 Keogh Road', 'None', '(01708) 257222', 'johncollinson@gmail.com', 'Registered disabled (mobility)')
+(53, 'John', 'Brown', '46 Belgrave Road', 'None', '(020) 6247 1718', 'johnbrown@outlook.com', 'None')
+(63, 'Lynda', 'Bentley', '110 Jack Clow Road', 'None', '(020) 3282 3208', 'lyndabentley@outlook.com', 'None')
+(73, 'Niki', 'Sich', '6 Belle Vue Lodge', 'Connaught Avenue', '(01708) 664310', 'nikisich@yahoo.com', 'None')
+(74, 'Philip', 'Burrough', '60 Credon Road', 'None', '(01708) 407412', 'philipburrough@yahoo.com', 'None')
+(92, 'Terence', 'Harris', '16 Higham Hill Road', 'None', '(020) 7323 1357', 'terenceharris@outlook.com', 'None')
+(99, 'Zak', 'Kuhl', '12 Mornington Road', 'None', '(01708) 744712', 'zakkuhl@outlook.com', 'None')
