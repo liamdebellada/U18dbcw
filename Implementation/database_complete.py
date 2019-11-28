@@ -151,21 +151,27 @@ def query():
     start_query_window = Window(app, title='Search', width=500, height=400)
     
     query_title = Text(start_query_window, 'Search the database:')
+    query_christmas_text = Text(start_query_window, 'Search Christmas trip:')
+    query_christmas = PushButton(start_query_window, text='Search', width=button_width, command=christmas_trip)
+
+def christmas_trip():
     report = open("report1.txt","w+")
     
-    s = '   '
-    
     report.write('ID   Firstname   Surname   Address_1        Address_2    Phone_number   Email Address           Notes'+'\n'+'\n')
+    
     cursor.execute("SELECT Trip_id from Trip INNER JOIN Destination ON Destination.destination_id = Trip.destination_id where destName = 'Lincoln Xmas Market'")
+    
     trip_id = cursor.fetchall()
     trip_id = [tripI[0] for tripI in trip_id]
     trip_id = int(trip_id[0])
-    print(trip_id)
+    
+    #print(trip_id)
     cursor.execute("SELECT customer_id FROM Booking where trip_id=?", (trip_id,))
     customer_id = cursor.fetchall()
     customer_id = [customerI[0] for customerI in customer_id]
     #customer_id = int(customer_id[0])
-    print(customer_id)
+    #print(customer_id)
+    
     for i in customer_id:
         cursor.execute('SELECT * FROM Customer where customer_id=?', (i,))
         print(cursor.fetchall())
