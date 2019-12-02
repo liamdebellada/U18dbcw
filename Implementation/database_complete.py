@@ -149,10 +149,22 @@ def destination():
     
 def query():
     start_query_window = Window(app, title='Search', width=500, height=400)
+    trips = []
+    for row in cursor.execute("SELECT destName FROM Destination"):
+        trips.append(row)
+        print(str(row))
     
-    query_title = Text(start_query_window, 'Search the database:')
+    query_title = Text(start_query_window, 'Search the database')
     query_christmas_text = Text(start_query_window, 'Search Christmas trip:')
     query_christmas = PushButton(start_query_window, text='Search', width=button_width, command=christmas_trip)
+    query_all_trip_text = Text(start_query_window, 'Search all trips:')
+    query_all_trip = PushButton(start_query_window, text='Search', width=button_width, command=all_trip)
+    query_e5_postcode_text = Text(start_query_window, 'Search all e5 postcodes:')
+    query_e5_postcode = PushButton(start_query_window, text='Search', width=button_width, command=e5_postcode)
+    query_trips_text = Text(start_query_window, 'Calculate income for all trips:')
+    query_trips = Combo(start_query_window, options=trips, width=14)
+    query_trips_button = PushButton(start_query_window, text='Calculate', command=Calculate, args=[trips, query_trips])
+    query_trips_calculated = Text(start_query_window, '')
 
 def christmas_trip():
     report = open("report1.txt","w+")
@@ -180,6 +192,25 @@ def christmas_trip():
             #print(row)
             report.write(str(row))
             report.write("\n")
+        
+def all_trip():
+    report = open('All_trips.txt', 'w+')
+    report.write("Destination:    Startdate:    cost:    Duration: \n")
+    for row in cursor.execute("SELECT destName, startDate, personCost, duration FROM Trip INNER JOIN Destination on Destination.destination_id = Trip.destination_id ORDER BY startDate"):
+        
+        #all_trip = cursor.fetchall()
+        report.write(str(row))
+        report.write('\n')
+
+def e5_postcode():
+    report = open('E5_leaflet.txt', 'w+')
+    report.write('Address1: Address2: Postcode:\n')
+    for row in cursor.execute("SELECT AddressLine1, AddressLine2, Postcode FROM customer WHERE Postcode LIKE 'E5%'"):
+        report.write(str(row))
+        report.write('\n')
+
+def Calculate(query_trips, trips):
+    print(query_trips.value)
         
 
 main_window_text = Text(app, 'Silver Dawn Coaches booking & management')

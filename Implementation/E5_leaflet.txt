@@ -1,0 +1,8 @@
+Address1: Address2: Postcode:
+('65 Rendlesham Road', 'None', 'E5 8PJ')
+('12 Oswald Street', 'None', 'E5 0BT')
+('32 Walsingham Road', 'None', 'E5 8NF')
+('Flat 3', '93 Upper Clapton Road', 'E5 9BU')
+('30 Harrington Hill', 'None', 'E5 9EY')
+('Flat 27', '4 Overbury Street', 'E5 0TF')
+('Ground Floor Flat', '53 Upper Clapton Road', 'E5 8AY')
