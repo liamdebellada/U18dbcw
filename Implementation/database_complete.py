@@ -150,20 +150,23 @@ def destination():
 def query():
     start_query_window = Window(app, title='Search', width=500, height=400)
     trips = []
-    for row in cursor.execute("SELECT destName FROM Destination"):
+    for row in cursor.execute("SELECT destName, trip_id FROM Trip INNER JOIN Destination on Destination.destination_id = Trip.destination_id ORDER BY startDate"):
         trips.append(row)
-        print(str(row))
-    
+        #print(str(row))
     query_title = Text(start_query_window, 'Search the database')
+    
     query_christmas_text = Text(start_query_window, 'Search Christmas trip:')
     query_christmas = PushButton(start_query_window, text='Search', width=button_width, command=christmas_trip)
+    
     query_all_trip_text = Text(start_query_window, 'Search all trips:')
     query_all_trip = PushButton(start_query_window, text='Search', width=button_width, command=all_trip)
+    
     query_e5_postcode_text = Text(start_query_window, 'Search all e5 postcodes:')
     query_e5_postcode = PushButton(start_query_window, text='Search', width=button_width, command=e5_postcode)
+    
     query_trips_text = Text(start_query_window, 'Calculate income for all trips:')
     query_trips = Combo(start_query_window, options=trips, width=14)
-    query_trips_button = PushButton(start_query_window, text='Calculate', command=Calculate, args=[trips, query_trips])
+    query_trips_button = PushButton(start_query_window, text='Calculate', command=Calculate, args=[query_trips])
     query_trips_calculated = Text(start_query_window, '')
 
 def christmas_trip():
@@ -172,7 +175,6 @@ def christmas_trip():
     report.write('ID   Firstname   Surname   Address_1        Address_2    Phone_number   Email Address           Notes'+'\n'+'\n')
     
     cursor.execute("SELECT Trip_id from Trip INNER JOIN Destination ON Destination.destination_id = Trip.destination_id where destName = 'Lincoln Xmas Market'")
-    
     trip_id = cursor.fetchall()
     trip_id = [tripI[0] for tripI in trip_id]
     trip_id = int(trip_id[0])
@@ -209,9 +211,25 @@ def e5_postcode():
         report.write(str(row))
         report.write('\n')
 
-def Calculate(query_trips, trips):
-    print(query_trips.value)
+def Calculate(query_trips):
+    d = query_trips.value
+    print(d)
+    
+    numbers = []
+    
+    customer_id = [customerI[0] for customerI in d]
+    #print(customer_id)
+    for i in customer_id:
+        #print(i)
+        if i.isdigit():
+            numbers.append(i)
         
+  
+    print(numbers)
+    print("".join(numbers))
+        
+
+
 
 main_window_text = Text(app, 'Silver Dawn Coaches booking & management')
 
