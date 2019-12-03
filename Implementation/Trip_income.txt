@@ -1,0 +1,2 @@
+Trip Destination  Trip ID  PersonCost SumPersonCost 
+('Calais Shopping Trip', 2)(8, '199', 10149)

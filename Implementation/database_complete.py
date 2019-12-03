@@ -166,8 +166,8 @@ def query():
     
     query_trips_text = Text(start_query_window, 'Calculate income for all trips:')
     query_trips = Combo(start_query_window, options=trips, width=14)
-    query_trips_button = PushButton(start_query_window, text='Calculate', command=Calculate, args=[query_trips])
     query_trips_calculated = Text(start_query_window, '')
+    query_trips_button = PushButton(start_query_window, text='Calculate', command=Calculate, args=[query_trips])
 
 def christmas_trip():
     report = open("report1.txt","w+")
@@ -212,8 +212,14 @@ def e5_postcode():
         report.write('\n')
 
 def Calculate(query_trips):
+    report = open('Trip_income.txt', 'w+')
+    
     d = query_trips.value
     print(d)
+    
+    d = str(d)
+    report.write('Trip Destination  Trip ID  PersonCost SumPersonCost \n')
+    report.write(d)
     
     numbers = []
     
@@ -225,12 +231,22 @@ def Calculate(query_trips):
             numbers.append(i)
         
   
-    print(numbers)
-    print("".join(numbers))
+    #print(numbers)
+    num = ("".join(numbers))
+    num = int(num)
+    print(num)
+    
+    cursor.execute('SELECT SUM(seatNumber) FROM Booking where trip_id=?', (num,))
+    
+    sums = cursor.fetchall()
+    sums = [tripI[0] for tripI in sums]
+    sums = int(sums[0])
+    print(sums)
+    
+    for row in cursor.execute("SELECT trip_id, personCost, (personCost)*? FROM Trip INNER JOIN Destination on Destination.destination_id = Trip.destination_id WHERE destName = 'Lincoln Xmas Market'", (sums,)):
+        row = str(row)
+        report.write(row)
         
-
-
-
 main_window_text = Text(app, 'Silver Dawn Coaches booking & management')
 
 picture = Picture(app, image="logo.png")
