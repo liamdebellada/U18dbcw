@@ -243,7 +243,7 @@ def Calculate(query_trips):
     sums = int(sums[0])
     print(sums)
     
-    for row in cursor.execute("SELECT trip_id, personCost, (personCost)*? FROM Trip INNER JOIN Destination on Destination.destination_id = Trip.destination_id WHERE destName = 'Lincoln Xmas Market'", (sums,)):
+    for row in cursor.execute("SELECT trip_id, personCost, (personCost)*? FROM Trip INNER JOIN Destination on Destination.destination_id = Trip.destination_id WHERE trip_id = ?", (sums, num,)):
         row = str(row)
         report.write(row)
         
