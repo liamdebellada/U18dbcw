@@ -40,9 +40,7 @@ def save(first_customer_name, second_customer_name, customer_address_1, customer
     db.commit()
     
 def booking_save(booking_seatnumber_value, booking_customer, booking_trip):
-    
     print('This has passed')
-    
     booking_customer = booking_customer.value
     booking_trip = booking_trip.value
     #using current_date for date entry
@@ -246,7 +244,9 @@ def Calculate(query_trips):
     for row in cursor.execute("SELECT trip_id, personCost, (personCost)*? FROM Trip INNER JOIN Destination on Destination.destination_id = Trip.destination_id WHERE trip_id = ?", (sums, num,)):
         row = str(row)
         report.write(row)
-        
+
+    
+    
 main_window_text = Text(app, 'Silver Dawn Coaches booking & management')
 
 picture = Picture(app, image="logo.png")
