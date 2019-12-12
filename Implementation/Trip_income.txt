@@ -1,2 +1,0 @@
-Trip Destination  Trip ID  PersonCost SumPersonCost 
-('Cardiff the Welsh Capital', 4)(4, '299', 8372)

@@ -5,7 +5,7 @@ with sqlite3.connect('silver_dawn_coaches') as db:
     cursor = db.cursor()
     cursor.execute("PRAGMA foreign_keys = 1")
 
-app = App(title="Silver Dawn database management", width=500, height=400)
+app = App(title="Silver Dawn database management", width=500, height=420)
 
 button_width = 11
 current_date = date.today()
@@ -91,7 +91,7 @@ def customer():
     customer_notes = TextBox(start_customer_window, '')
     
     
-    save_button = PushButton(start_customer_window, text ='Save', width=button_width, command=save, args=[first_customer_name, second_customer_name, customer_address_1, customer_address_2, customer_email_address, customer_phone_number, customer_notes])
+    save_button = PushButton(start_customer_window, text ='Save & Exit', width=button_width, command=save, args=[first_customer_name, second_customer_name, customer_address_1, customer_address_2, customer_email_address, customer_phone_number, customer_notes])
     
 def booking():
     start_booking_window = Window(app, title='Add booking', width=500, height=400)
@@ -109,7 +109,7 @@ def booking():
     booking_trip_text = Text(start_booking_window, 'Trip ID:')
     booking_trip = TextBox(start_booking_window, '')
     
-    save_button = PushButton(start_booking_window, text='Save', width=button_width, command=booking_save, args=[booking_seatnumber, booking_customer, booking_trip])
+    save_button = PushButton(start_booking_window, text='Save & Exit', width=button_width, command=booking_save, args=[booking_seatnumber, booking_customer, booking_trip])
 
 def trip():
     start_trip_window = Window(app, title='Add trip', width=500, height=400)
@@ -132,7 +132,7 @@ def trip():
     trip_driver_text = Text(start_trip_window, 'Enter driver ID:')
     trip_driver = TextBox(start_trip_window, '')
     
-    trip_save_button = PushButton(start_trip_window, text='Save', width=button_width, command=trip_save, args=[trip_cost, trip_startdate, trip_duration, trip_destination, trip_coach, trip_driver])
+    trip_save_button = PushButton(start_trip_window, text='Save & Exit', width=button_width, command=trip_save, args=[trip_cost, trip_startdate, trip_duration, trip_destination, trip_coach, trip_driver])
     
 def destination():
     start_destination_window = Window(app, title='Add destination', width=500, height=400)
@@ -143,7 +143,7 @@ def destination():
     destination_hotel_text = Text(start_destination_window, 'Enter Hotel name:')
     destination_hotel = TextBox(start_destination_window, '')
     
-    destination_save_button = PushButton(start_destination_window, text='Save', command=destination_save, args=[destination_name, destination_hotel])
+    destination_save_button = PushButton(start_destination_window, text='Save & Exit', command=destination_save, args=[destination_name, destination_hotel])
     
 def query():
     start_query_window = Window(app, title='Search', width=500, height=400)
@@ -256,6 +256,7 @@ add_booking_button = PushButton(app, text ='New booking', width=button_width, co
 add_trip_button = PushButton(app, text ='New trip', width=button_width, command=trip)
 add_destination_button = PushButton(app, text ='New destination', width=button_width, command=destination)
 search_button = PushButton(app, text = 'Search Data', width=button_width, command=query)
+exit_button = PushButton(app, text = 'Save & Exit', width=button_width, command=exit)
 
 
 app.display()
