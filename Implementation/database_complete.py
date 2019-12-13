@@ -5,9 +5,9 @@ with sqlite3.connect('silver_dawn_coaches') as db:
     cursor = db.cursor()
     cursor.execute("PRAGMA foreign_keys = 1")
 
-app = App(title="Silver Dawn database management", width=500, height=420)
+app = App(title="Silver Dawn database management", width=500, height=420, bg = "#FD474A")
 
-button_width = 11
+button_width = 16
 current_date = date.today()
 
 booking_seatnumber = 0
@@ -68,33 +68,34 @@ def trip_save(trip_cost, trip_startdate, trip_duration, trip_destination, trip_c
     db.commit()
     
 def customer():
-    start_customer_window = Window(app, title='Add customer', width=500, height=400)
+    start_customer_window = Window(app, title='Add customer', width=500, height=400, bg = "#FD474A")
     customer_window_text = Text(start_customer_window, 'New customer')
     
     
     customer_name_text = Text(start_customer_window, 'Enter name:')
-    first_customer_name = TextBox(start_customer_window, text='', align='top')
-    
-    second_customer_name = TextBox(start_customer_window, text='', align='top')
+    first_customer_name = TextBox(start_customer_window, text='', align='top', width=button_width)
+    customer_surname_text= Text(start_customer_window, 'Enter surname: ')
+    second_customer_name = TextBox(start_customer_window, text='', align='top', width=button_width)
     
     customer_address_text = Text(start_customer_window, 'Enter address:')
-    customer_address_1 = TextBox(start_customer_window, text='')
-    customer_address_2 = TextBox(start_customer_window, text='')
+    customer_address_1 = TextBox(start_customer_window, text='', width=button_width)
+    cutomer_address_text2 = Text(start_customer_window, 'Enter address2')
+    customer_address_2 = TextBox(start_customer_window, text='', width=button_width)
     
     customer_phone_number_text = Text(start_customer_window, 'Enter phone number:')
-    customer_phone_number = TextBox(start_customer_window, text='')
+    customer_phone_number = TextBox(start_customer_window, text='', width=button_width)
     
     customer_email_address_text = Text(start_customer_window, 'Enter email address:')
-    customer_email_address = TextBox(start_customer_window, text='')
+    customer_email_address = TextBox(start_customer_window, text='', width=button_width)
     
     customer_notes_text = Text(start_customer_window, 'Additional info')
-    customer_notes = TextBox(start_customer_window, '')
+    customer_notes = TextBox(start_customer_window, '', width=button_width)
     
     
     save_button = PushButton(start_customer_window, text ='Save & Exit', width=button_width, command=save, args=[first_customer_name, second_customer_name, customer_address_1, customer_address_2, customer_email_address, customer_phone_number, customer_notes])
     
 def booking():
-    start_booking_window = Window(app, title='Add booking', width=500, height=400)
+    start_booking_window = Window(app, title='Add booking', width=500, height=400, bg = "#FD474A")
     
     booking_title = Text(start_booking_window, 'New booking')
     
@@ -112,7 +113,7 @@ def booking():
     save_button = PushButton(start_booking_window, text='Save & Exit', width=button_width, command=booking_save, args=[booking_seatnumber, booking_customer, booking_trip])
 
 def trip():
-    start_trip_window = Window(app, title='Add trip', width=500, height=400)
+    start_trip_window = Window(app, title='Add trip', width=500, height=400, bg = "#FD474A")
     
     trip_cost_text = Text(start_trip_window, 'Enter cost per person:')
     trip_cost = TextBox(start_trip_window, '')
@@ -135,7 +136,7 @@ def trip():
     trip_save_button = PushButton(start_trip_window, text='Save & Exit', width=button_width, command=trip_save, args=[trip_cost, trip_startdate, trip_duration, trip_destination, trip_coach, trip_driver])
     
 def destination():
-    start_destination_window = Window(app, title='Add destination', width=500, height=400)
+    start_destination_window = Window(app, title='Add destination', width=500, height=400, bg = "#FD474A")
     
     destination_name_text = Text(start_destination_window, 'Enter Destination name:')
     destination_name = TextBox(start_destination_window, '')
@@ -146,7 +147,7 @@ def destination():
     destination_save_button = PushButton(start_destination_window, text='Save & Exit', command=destination_save, args=[destination_name, destination_hotel])
     
 def query():
-    start_query_window = Window(app, title='Search', width=500, height=400)
+    start_query_window = Window(app, title='Search', width=500, height=400, bg = "#FD474A")
     trips = []
     for row in cursor.execute("SELECT destName, trip_id FROM Trip INNER JOIN Destination on Destination.destination_id = Trip.destination_id ORDER BY startDate"):
         trips.append(row)
